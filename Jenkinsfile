@@ -4,20 +4,19 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                git 'https://github.com/testeroprogramowania/restassureddemo'
+                git 'https://github.com/Kamilbeb/restassureddemo.git'
             }
         }
-
-         stage('Run API tests') {
+        stage('Run API tests') {
             steps {
-                sh 'mvn clean test'
+                powershell 'mvn clean test'
             }
         }
-
-         stage('Publish report') {
+        stage('Publish report') {
             steps {
-               publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/surefire-reports', reportFiles: 'emailable-report.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
         }
     }
 }
+
